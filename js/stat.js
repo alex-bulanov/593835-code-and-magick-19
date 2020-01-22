@@ -44,7 +44,7 @@ window.renderStatistics = function (ctx, players, times) {
     if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      var barColor = 'hsl(240, ' + Math.floor(Math.random() * Math.floor(100)) + '%, ' + '50%';
+      var barColor = 'hsl(240, ' + Math.floor(Math.random() * 100) + '%, ' + '50%';
       ctx.fillStyle = barColor;
     }
 
