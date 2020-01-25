@@ -5,18 +5,18 @@ var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Валь
 var coatColors = ['rgb (101, 137, 164)', 'rgb (241, 43, 107)', 'rgb (146, 100, 161)', 'rgb (56, 159, 117)', 'rgb (215, 210, 55)', 'rgb (0, 0, 0)'];
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 
-var getRandomNumber = function (arr) {
+var getRandomElement = function (arr) {
   var max = arr.length - 1;
   var min = 0;
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return arr[Math.floor(Math.random() * (max - min + 1) + min)];
 };
 
-var creatingWizard = function (namesArr, surnamesArr, coatColorsArr, eyesColorsArr) {
+var creatingWizard = function (wizNames, wizSurnames, wizCoatColors, wizEyesColors) {
   var object = {
-    name: namesArr[getRandomNumber(namesArr)],
-    surname: surnamesArr[getRandomNumber(surnamesArr)],
-    coatColor: coatColorsArr[getRandomNumber(coatColorsArr)],
-    eyesColor: eyesColorsArr[getRandomNumber(eyesColorsArr)]
+    name: getRandomElement(wizNames),
+    surname: getRandomElement(wizSurnames),
+    coatColor: getRandomElement(wizCoatColors),
+    eyesColor: getRandomElement(wizEyesColors)
   };
   return object;
 };
@@ -37,6 +37,5 @@ for (var i = 0; i < 4; i++) {
   wizardElement.querySelector('.wizard-coat').style.fill = currentWizard.coatColor.slice(0, 3) + currentWizard.coatColor.slice(4);
   wizardElement.querySelector('.wizard-eyes').style.fill = currentWizard.eyesColor;
   similarListElement.appendChild(wizardElement);
-
 }
 
