@@ -8,6 +8,7 @@ var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Крис�
 var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var coatColors = ['rgb (101, 137, 164)', 'rgb (241, 43, 107)', 'rgb (146, 100, 161)', 'rgb (56, 159, 117)', 'rgb (215, 210, 55)', 'rgb (0, 0, 0)'];
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
+var fireballColor = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 var getRandomElement = function (arr) {
   var max = arr.length - 1;
@@ -26,7 +27,6 @@ var creatingWizard = function (wizNames, wizSurnames, wizCoatColors, wizEyesColo
 };
 
 var userDialog = document.querySelector('.setup');
-// userDialog.classList.remove('hidden');
 
 var setupSimilar = document.querySelector('.setup-similar');
 setupSimilar.classList.remove('hidden');
@@ -79,7 +79,7 @@ var onPopupEnterPress = function (evt) {
   }
 };
 
-var onCloseCloseButtonEnterPress = function (evt) {
+var onCloseButtonEnterPress = function (evt) {
   if (evt.key === ENTER_KEY) {
     closePopup();
   }
@@ -88,7 +88,7 @@ var onCloseCloseButtonEnterPress = function (evt) {
 setupOpen.addEventListener('click', openPopup);
 setupOpen.addEventListener('keydown', onPopupEnterPress);
 setupCloseButton.addEventListener('click', closePopup);
-setupCloseButton.addEventListener('keydown', onCloseCloseButtonEnterPress);
+setupCloseButton.addEventListener('keydown', onCloseButtonEnterPress);
 
 // Валидация ввода имени персонажа.
 
@@ -118,3 +118,38 @@ userNameInput.addEventListener('input', function (evt) {
   }
 });
 
+// Изменение цвета мантии персонажа по нажатию.
+
+var wizardCoat = userDialog.querySelector('.wizard-coat');
+
+var onClickCoatSetColor = function () {
+  var currentColor = getRandomElement(coatColors);
+  // Убераем пробел в строке "rgb (xxx, yyy, zzz)"
+  currentColor = (currentColor.slice(0, 3) + currentColor.slice(4));
+  wizardCoat.style.fill = currentColor;
+};
+
+wizardCoat.addEventListener('click', onClickCoatSetColor);
+
+// Изменение цвета глаз персонажа по нажатию.
+
+var wizardEyes = userDialog.querySelector('.wizard-eyes');
+
+var onClickEyesSetColor = function () {
+  wizardEyes.style.fill = getRandomElement(eyesColors);
+};
+
+wizardEyes.addEventListener('click', onClickEyesSetColor);
+
+// Изменение цвета фаерболов по нажатию.
+
+var wizardFireball = userDialog.querySelector('.setup-fireball-wrap');
+var fireballColorInput = userDialog.querySelector('input[name=fireball-color]');
+
+var onClickFireballSetColor = function () {
+  var currentColor = getRandomElement(fireballColor);
+  wizardFireball.style.background = currentColor;
+  fireballColorInput.value = currentColor;
+};
+
+wizardFireball.addEventListener('click', onClickFireballSetColor);
