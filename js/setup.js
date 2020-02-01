@@ -2,6 +2,7 @@
 
 var ESC_KEY = 'Escape';
 var ENTER_KEY = 'Enter';
+var MIN_NAME_LENGTH = 2;
 
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -88,4 +89,32 @@ setupOpen.addEventListener('click', openPopup);
 setupOpen.addEventListener('keydown', onPopupEnterPress);
 setupCloseButton.addEventListener('click', closePopup);
 setupCloseButton.addEventListener('keydown', onCloseCloseButtonEnterPress);
+
+// Валидация ввода имени персонажа.
+
+var userNameInput = userDialog.querySelector('.setup-user-name');
+
+userNameInput.addEventListener('invalid', function () {
+  if (userNameInput.validity.tooShort) {
+    userNameInput.setCustomValidity('Имя персонажа не может содержать менее 2 символов.');
+  } else if (userNameInput.validity.tooLong) {
+    userNameInput.setCustomValidity('Максимальная длина имени персонажа — 25 символов.');
+  } else if (userNameInput.validity.valueMissing) {
+    userNameInput.setCustomValidity('Обязательное поле');
+  } else {
+    userNameInput.setCustomValidity('');
+  }
+});
+
+userNameInput.addEventListener('input', function (evt) {
+  var target = evt.target;
+  if (target.value.length < MIN_NAME_LENGTH) {
+    target.setCustomValidity('Имя должно состоять минимум из ' +
+      MIN_NAME_LENGTH +
+      '-х символов.'
+    );
+  } else {
+    target.setCustomValidity('');
+  }
+});
 
