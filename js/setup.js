@@ -1,7 +1,5 @@
 'use strict';
 
-var ESC_KEY = 'Escape';
-var ENTER_KEY = 'Enter';
 var MIN_NAME_LENGTH = 2;
 
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
@@ -9,22 +7,6 @@ var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Валь
 var coatColors = ['rgb (101, 137, 164)', 'rgb (241, 43, 107)', 'rgb (146, 100, 161)', 'rgb (56, 159, 117)', 'rgb (215, 210, 55)', 'rgb (0, 0, 0)'];
 var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 var fireballColor = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-
-var getRandomElement = function (arr) {
-  var max = arr.length - 1;
-  var min = 0;
-  return arr[Math.floor(Math.random() * (max - min + 1) + min)];
-};
-
-var creatingWizard = function (wizNames, wizSurnames, wizCoatColors, wizEyesColors) {
-  var object = {
-    name: getRandomElement(wizNames),
-    surname: getRandomElement(wizSurnames),
-    coatColor: getRandomElement(wizCoatColors),
-    eyesColor: getRandomElement(wizEyesColors)
-  };
-  return object;
-};
 
 var userDialog = document.querySelector('.setup');
 
@@ -36,7 +18,7 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template').c
 
 for (var i = 0; i < 4; i++) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
-  var currentWizard = creatingWizard(names, surnames, coatColors, eyesColors);
+  var currentWizard = window.creatingWizard(names, surnames, coatColors, eyesColors);
   wizardElement.querySelector('.setup-similar-label').textContent = currentWizard.name + ' ' + currentWizard.surname;
   wizardElement.querySelector('.wizard-coat').style.fill = currentWizard.coatColor.slice(0, 3) + currentWizard.coatColor.slice(4);
   wizardElement.querySelector('.wizard-eyes').style.fill = currentWizard.eyesColor;
@@ -68,27 +50,22 @@ var closePopup = function () {
 };
 
 var onPopupEscPress = function (evt) {
-  if (evt.key === ESC_KEY) {
-    closePopup();
-  }
+  window.event.isEnterEvent(evt, closePopup());
 };
 
 var onPopupEnterPress = function (evt) {
-  if (evt.key === ENTER_KEY) {
-    openPopup();
-  }
+  window.event.isEnterEvent(evt, openPopup());
 };
 
 var onCloseButtonEnterPress = function (evt) {
-  if (evt.key === ENTER_KEY) {
-    closePopup();
-  }
+  window.event.isEnterEvent(evt, closePopup());
 };
 
 setupOpen.addEventListener('click', openPopup);
 setupOpen.addEventListener('keydown', onPopupEnterPress);
 setupCloseButton.addEventListener('click', closePopup);
 setupCloseButton.addEventListener('keydown', onCloseButtonEnterPress);
+
 
 // Валидация ввода имени персонажа.
 
@@ -123,7 +100,7 @@ userNameInput.addEventListener('input', function (evt) {
 var wizardCoat = userDialog.querySelector('.wizard-coat');
 
 var onClickCoatSetColor = function () {
-  var currentColor = getRandomElement(coatColors);
+  var currentColor = window.randomElement(coatColors);
   // Убераем пробел в строке "rgb (xxx, yyy, zzz)"
   currentColor = (currentColor.slice(0, 3) + currentColor.slice(4));
   wizardCoat.style.fill = currentColor;
@@ -136,7 +113,7 @@ wizardCoat.addEventListener('click', onClickCoatSetColor);
 var wizardEyes = userDialog.querySelector('.wizard-eyes');
 
 var onClickEyesSetColor = function () {
-  wizardEyes.style.fill = getRandomElement(eyesColors);
+  wizardEyes.style.fill = window.randomElement(eyesColors);
 };
 
 wizardEyes.addEventListener('click', onClickEyesSetColor);
@@ -147,7 +124,7 @@ var wizardFireball = userDialog.querySelector('.setup-fireball-wrap');
 var fireballColorInput = userDialog.querySelector('input[name=fireball-color]');
 
 var onClickFireballSetColor = function () {
-  var currentColor = getRandomElement(fireballColor);
+  var currentColor = window.randomElement(fireballColor);
   wizardFireball.style.background = currentColor;
   fireballColorInput.value = currentColor;
 };
