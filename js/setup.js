@@ -1,6 +1,7 @@
 'use strict';
 
 var MIN_NAME_LENGTH = 2;
+var WIZARDS_QUANTITY = 4;
 
 var names = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var surnames = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -16,7 +17,13 @@ setupSimilar.classList.remove('hidden');
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-for (var i = 0; i < 4; i++) {
+// ф-ция отрисовки похожих волшебников.
+
+// var renderWizards = function (wizards) {
+
+// };
+
+for (var i = 0; i < WIZARDS_QUANTITY; i++) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
   var currentWizard = window.creatingWizard(names, surnames, coatColors, eyesColors);
   wizardElement.querySelector('.setup-similar-label').textContent = currentWizard.name + ' ' + currentWizard.surname;
@@ -130,3 +137,5 @@ var onClickFireballSetColor = function () {
 };
 
 wizardFireball.addEventListener('click', onClickFireballSetColor);
+
+window.backend.load(window.backend.onLoad, window.backend.onError);
