@@ -2,8 +2,10 @@
 
 
 (function () {
+
   var onLoad = function (data) {
-    var wizards = data;
+    var wizzards = data;
+    console.log(wizzards);
   };
 
   var onError = function (message) {

@@ -11,3 +11,15 @@
     return object;
   };
 })();
+
+
+// (function () {
+//   window.creatingWizard = function (currentObj) {
+//     var object = {
+//       name: currentObj.name,
+//       colorCoat: currentObj.colorCoat,
+//       colorEyes: currentObj.colorEyes
+//     };
+//     return object;
+//   };
+// })();

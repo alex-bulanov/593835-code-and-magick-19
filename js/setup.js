@@ -17,12 +17,6 @@ setupSimilar.classList.remove('hidden');
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-// ф-ция отрисовки похожих волшебников.
-
-// var renderWizards = function (wizards) {
-
-// };
-
 for (var i = 0; i < WIZARDS_QUANTITY; i++) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
   var currentWizard = window.creatingWizard(names, surnames, coatColors, eyesColors);
@@ -139,3 +133,6 @@ var onClickFireballSetColor = function () {
 wizardFireball.addEventListener('click', onClickFireballSetColor);
 
 window.backend.load(window.backend.onLoad, window.backend.onError);
+
+// ф-ция отрисовки похожих волшебников.
+
