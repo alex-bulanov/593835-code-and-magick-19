@@ -43,7 +43,6 @@
       }
     });
 
-
     xhr.timeout = 1000;
     xhr.open('GET', URL, true);
 
@@ -54,8 +53,44 @@
     xhr.send();
   };
 
+  var save = function (data, onSuc, onErr) {
+    var xhr = new XMLHttpRequest();
+    var URL = 'https://js.dump.academy/code-and-magick';
+
+    xhr.addEventListener('load', function () {
+      var error = '';
+      switch (xhr.status) {
+        case 200:
+          onSuc(xhr.response);
+          break;
+
+        case 400:
+          error = 'Неверный запрос';
+          break;
+        case 401:
+          error = 'Пользователь не авторизован';
+          break;
+        case 404:
+          error = 'Ничего не найдено';
+          break;
+
+        default:
+          error = 'Cтатус ответа: : ' + xhr.status + ' ' + xhr.statusText;
+      }
+
+      if (error) {
+        onErr(error);
+      }
+    });
+
+    xhr.open('POST', URL);
+    xhr.send(data);
+  };
+
+
   window.backend = {
     load: load,
+    save: save,
     onLoad: onLoad,
     onError: onError
   };

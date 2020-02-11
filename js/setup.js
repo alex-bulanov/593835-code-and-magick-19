@@ -7,6 +7,7 @@ var eyesColors = ['black', 'red', 'blue', 'yellow', 'green'];
 var fireballColor = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 var userDialog = document.querySelector('.setup');
+var form = userDialog.querySelector('.setup-wizard-form');
 
 var setupSimilar = document.querySelector('.setup-similar');
 setupSimilar.classList.remove('hidden');
@@ -17,6 +18,9 @@ setupSimilar.classList.remove('hidden');
 var setupOpen = document.querySelector('.setup-open');
 var setupCloseButton = userDialog.querySelector('.setup-close');
 var setupUserName = userDialog.querySelector('.setup-user-name');
+var setupUserCoatColor = userDialog.querySelector('[name = coat-color]');
+var setupUserEyesColor = userDialog.querySelector('[name = eyes-color]');
+
 
 var openPopup = function () {
   userDialog.classList.remove('hidden');
@@ -91,6 +95,7 @@ var onClickCoatSetColor = function () {
   // Убераем пробел в строке "rgb (xxx, yyy, zzz)"
   currentColor = (currentColor.slice(0, 3) + currentColor.slice(4));
   wizardCoat.style.fill = currentColor;
+  setupUserCoatColor.value = currentColor;
 };
 
 wizardCoat.addEventListener('click', onClickCoatSetColor);
@@ -100,7 +105,9 @@ wizardCoat.addEventListener('click', onClickCoatSetColor);
 var wizardEyes = userDialog.querySelector('.wizard-eyes');
 
 var onClickEyesSetColor = function () {
-  wizardEyes.style.fill = window.randomElement(eyesColors);
+  var currentColor = window.randomElement(eyesColors);
+  wizardEyes.style.fill = currentColor;
+  setupUserEyesColor.value = currentColor;
 };
 
 wizardEyes.addEventListener('click', onClickEyesSetColor);
@@ -118,5 +125,10 @@ var onClickFireballSetColor = function () {
 
 wizardFireball.addEventListener('click', onClickFireballSetColor);
 
-
 window.backend.load(window.backend.onLoad, window.backend.onError);
+
+form.addEventListener('submit', function (evt) {
+  window.backend.save(new FormData(form), window.backend.onLoad, window.backend.onError);
+  userDialog.classList.add('hidden');
+  evt.preventDefault();
+});
