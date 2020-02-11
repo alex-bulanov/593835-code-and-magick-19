@@ -2,14 +2,13 @@
 
 
 (function () {
-
   var onLoad = function (data) {
-    var wizzards = data;
-    console.log(wizzards);
+    window.render.renderWizard(data);
   };
 
+
   var onError = function (message) {
-    console.error(message);
+    window.render.renderError(message);
   };
 
   var load = function (onSuc, onErr) {
@@ -44,7 +43,13 @@
       }
     });
 
-    xhr.open('GET', URL);
+
+    xhr.timeout = 1000;
+    xhr.open('GET', URL, true);
+
+    xhr.addEventListener('timeout', function () {
+      window.render.renderError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+    });
 
     xhr.send();
   };
