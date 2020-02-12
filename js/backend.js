@@ -34,7 +34,7 @@
       }
     });
 
-    xhr.timeout = 1000;
+    xhr.timeout = 5000;
     xhr.open('GET', URL, true);
 
     xhr.addEventListener('timeout', function () {

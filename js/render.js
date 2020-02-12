@@ -8,6 +8,7 @@
 
   // ф-ция отрисовки похожих волшебников.
   var renderWizard = function (objects) {
+
     for (var i = 0; i < WIZARDS_QUANTITY; i++) {
       var wizardElement = similarWizardTemplate.cloneNode(true);
       var currentWizard = objects[i];
