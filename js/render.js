@@ -6,23 +6,12 @@
   var similarListElement = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-  var getWizard = function (currentObj) {
-    var object = {
-      name: currentObj.name,
-      colorCoat: currentObj.colorCoat,
-      colorEyes: currentObj.colorEyes
-    };
-    return object;
-  };
-
-  window.creatingWizard = {
-    creatingWizard: getWizard,
-  };
   // ф-ция отрисовки похожих волшебников.
   var renderWizard = function (objects) {
     for (var i = 0; i < WIZARDS_QUANTITY; i++) {
       var wizardElement = similarWizardTemplate.cloneNode(true);
-      var currentWizard = getWizard(objects[i]);
+      var currentWizard = objects[i];
+
       wizardElement.querySelector('.setup-similar-label').textContent = currentWizard.name;
       wizardElement.querySelector('.wizard-coat').style.fill = currentWizard.colorCoat;
       wizardElement.querySelector('.wizard-eyes').style.fill = currentWizard.colorEyes;
@@ -50,7 +39,6 @@
   };
 
   window.render = {
-    getWizard: getWizard,
     renderWizard: renderWizard,
     renderError: renderError
   };

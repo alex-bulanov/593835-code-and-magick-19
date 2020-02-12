@@ -1,15 +1,6 @@
 'use strict';
 
-
 (function () {
-  var onLoad = function (data) {
-    window.render.renderWizard(data);
-  };
-
-
-  var onError = function (message) {
-    window.render.renderError(message);
-  };
 
   var load = function (onSuc, onErr) {
 
@@ -63,7 +54,6 @@
         case 200:
           onSuc(xhr.response);
           break;
-
         case 400:
           error = 'Неверный запрос';
           break;
@@ -90,8 +80,6 @@
 
   window.backend = {
     load: load,
-    save: save,
-    onLoad: onLoad,
-    onError: onError
+    save: save
   };
 })();

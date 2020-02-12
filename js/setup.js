@@ -52,6 +52,14 @@ var onCloseButtonEnterPress = function (evt) {
   window.event.isEnterEvent(evt, closePopup());
 };
 
+var onLoad = function (data) {
+  window.render.renderWizard(data);
+};
+
+var onError = function (message) {
+  window.render.renderError(message);
+};
+
 setupOpen.addEventListener('click', openPopup);
 setupOpen.addEventListener('keydown', onPopupEnterPress);
 setupCloseButton.addEventListener('click', closePopup);
@@ -125,10 +133,10 @@ var onClickFireballSetColor = function () {
 
 wizardFireball.addEventListener('click', onClickFireballSetColor);
 
-window.backend.load(window.backend.onLoad, window.backend.onError);
+window.backend.load(onLoad, onError);
 
 form.addEventListener('submit', function (evt) {
-  window.backend.save(new FormData(form), window.backend.onLoad, window.backend.onError);
+  window.backend.save(new FormData(form), onLoad, onError);
   userDialog.classList.add('hidden');
   evt.preventDefault();
 });
