@@ -109,7 +109,7 @@ var coatColor = wizardCoat.style.fill;
 
 var onClickCoatSetColor = function () {
 
-  var currentColor = window.randomElement(coatColors);
+  var currentColor = window.getRandomElement(coatColors);
   // Убераем пробел в строке "rgb (xxx, yyy, zzz)"
   currentColor = (currentColor.slice(0, 3) + currentColor.slice(4));
   wizardCoat.style.fill = currentColor;
@@ -127,7 +127,7 @@ var wizardEyes = userDialog.querySelector('.wizard-eyes');
 var eyesColor = wizardEyes.style.fill;
 
 var onClickEyesSetColor = function () {
-  var currentColor = window.randomElement(eyesColors);
+  var currentColor = window.getRandomElement(eyesColors);
   wizardEyes.style.fill = currentColor;
   setupUserEyesColor.value = currentColor;
   eyesColor = currentColor;
@@ -143,7 +143,7 @@ var wizardFireball = userDialog.querySelector('.setup-fireball-wrap');
 var fireballColorInput = userDialog.querySelector('input[name=fireball-color]');
 
 var onClickFireballSetColor = function () {
-  var currentColor = window.randomElement(fireballColor);
+  var currentColor = window.getRandomElement(fireballColor);
   wizardFireball.style.background = currentColor;
   fireballColorInput.value = currentColor;
 };
@@ -166,7 +166,7 @@ var getRank = function (wizard) {
   return rank;
 };
 
-var namesComparator = function (left, right) {
+var compareNames = function (left, right) {
   if (left > right) {
     return 1;
   } else if (left < right) {
@@ -180,7 +180,7 @@ var updateWizards = function () {
   var rankedWizards = wizards.sort(function (left, right) {
     var rankDiff = getRank(right) - getRank(left);
     if (rankDiff === 0) {
-      rankDiff = namesComparator(left.name, right.name);
+      rankDiff = compareNames(left.name, right.name);
     }
     return rankDiff;
   });
