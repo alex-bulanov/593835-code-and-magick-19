@@ -5,7 +5,7 @@
   var load = function (onSuc, onErr) {
 
     var xhr = new XMLHttpRequest();
-    var URL = 'https://js.dump.academy/code-and-magick/data';
+    var URL = 'https://javascript.pages.academy/code-and-magick/data';
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
@@ -46,7 +46,7 @@
 
   var save = function (data, onSuc, onErr) {
     var xhr = new XMLHttpRequest();
-    var URL = 'https://js.dump.academy/code-and-magick';
+    var URL = 'https://javascript.pages.academy/code-and-magick';
 
     xhr.addEventListener('load', function () {
       var error = '';
